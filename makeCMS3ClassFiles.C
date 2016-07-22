@@ -788,7 +788,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
       }
       implf << "      #endif // #ifdef PARANOIA" << endl;
     }
-    implf << "    " << "} else { " << endl;
+    implf << "    " << "} else {" << endl;
     implf << "      " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
           << " does not exist!\\n\");" << endl;
     implf << "      " << "exit(1);" << endl << "    }" << endl;
