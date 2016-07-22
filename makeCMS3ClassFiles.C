@@ -668,141 +668,140 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
       }
-      implf << "  const " << classname << " &" << funcname << "()" << endl;
+      implf << "const " << classname << " &" << funcname << "() {" << endl;
     } else {
       if(classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-1);
         classname.ReplaceAll("edm::Wrapper<","");
       }
       if(classname != "" ) {
-        implf << "  const " << classname << " &" << funcname << "()" << endl;
+        implf << "const " << classname << " &" << funcname << "() {" << endl;
       } else {
         if(title.EndsWith("/i"))
-          implf << "  const unsigned int &" << funcname << "()" << endl;
+          implf << "const unsigned int &" << funcname << "() {" << endl;
         if(title.EndsWith("/l"))
-          implf << "  const unsigned long long &" << funcname << "()" << endl;
+          implf << "const unsigned long long &" << funcname << "() {" << endl;
         if(title.EndsWith("/F"))
-          implf << "  const float &" << funcname << "()" << endl;
+          implf << "const float &" << funcname << "() {" << endl;
         if(title.EndsWith("/I"))
-          implf << "  const int &" << funcname << "()" << endl;
+          implf << "const int &" << funcname << "() {" << endl;
         if(title.EndsWith("/O"))
-          implf << "  const bool &" << funcname << "()" << endl;
+          implf << "const bool &" << funcname << "() {" << endl;
         if(title.EndsWith("/D"))
-          implf << "  const double &" << funcname << "()" << endl;
+          implf << "const double &" << funcname << "() {" << endl;
       }
     }
     aliasname = aliasarray->At(i)->GetName();
-    implf << "  {" << endl;
-    implf << "    " << "if (not " << Form("%s_isLoaded) {",aliasname.Data()) << endl;
-    implf << "      " << "if (" << Form("%s_branch",aliasname.Data()) << " != 0) {" << endl;
-    implf << "        " << Form("%s_branch",aliasname.Data()) << "->GetEntry(index);" << endl;
+    implf << "  " << "if (not " << Form("%s_isLoaded) {",aliasname.Data()) << endl;
+    implf << "    " << "if (" << Form("%s_branch",aliasname.Data()) << " != 0) {" << endl;
+    implf << "      " << Form("%s_branch",aliasname.Data()) << "->GetEntry(index);" << endl;
     if (paranoid) {
-      implf << "        #ifdef PARANOIA" << endl;
+      implf << "      #ifdef PARANOIA" << endl;
       if (classname == "vector<vector<float> >") {
         if(isSkimmedNtuple) {
-          implf << "        " << "for (vector<vector<float> >::const_iterator i = "
+          implf << "      " << "for (vector<vector<float> >::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
-          implf << "        " << "for (vector<vector<float> >::const_iterator i = "
+          implf << "      " << "for (vector<vector<float> >::const_iterator i = "
                 << aliasname << "_.begin(); i != "<< aliasname << "_.end(); ++i) {" << endl;
         }
-        implf << "          " << "for (vector<float>::const_iterator j = i->begin(); "
+        implf << "        " << "for (vector<float>::const_iterator j = i->begin(); "
           "j != i->end(); ++j) {" << endl;
-        implf << "            " << "if (not isfinite(*j)) {" << endl;
-        implf << "              " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
-              << " contains a bad float: %f\\n\", *j);" << endl << "              " << "exit(1);"
+        implf << "          " << "if (not isfinite(*j)) {" << endl;
+        implf << "            " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+              << " contains a bad float: %f\\n\", *j);" << endl << "            " << "exit(1);"
               << endl;
-        implf << "            }\n          }\n        }" << endl;
+        implf << "          }\n        }\n      }" << endl;
       } else if (classname == "vector<float>") {
         if(isSkimmedNtuple) {
-          implf << "        " << "for (vector<float>::const_iterator i = "
+          implf << "      " << "for (vector<float>::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
-          implf << "        " << "for (vector<float>::const_iterator i = "
+          implf << "      " << "for (vector<float>::const_iterator i = "
                 << aliasname << "_.begin(); i != "<< aliasname << "_.end(); ++i) {" << endl;
         }
-        implf << "          " << "if (not isfinite(*i)) {" << endl;
-        implf << "            " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
-              << " contains a bad float: %f\\n\", *i);" << endl << "            " << "exit(1);"
-              << endl;
-        implf << "          }\n        }" << endl;
-      } else if (classname == "float") {
-        implf << "        " << "if (not isfinite(" << aliasname << "_)) {" << endl;
+        implf << "        " << "if (not isfinite(*i)) {" << endl;
         implf << "          " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
-              << " contains a bad float: %f\\n\", " << aliasname << "_);" << endl
-              << "          " << "exit(1);"
+              << " contains a bad float: %f\\n\", *i);" << endl << "          " << "exit(1);"
               << endl;
-        implf << "        }" << endl;
+        implf << "        }\n      }" << endl;
+      } else if (classname == "float") {
+        implf << "      " << "if (not isfinite(" << aliasname << "_)) {" << endl;
+        implf << "        " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+              << " contains a bad float: %f\\n\", " << aliasname << "_);" << endl
+              << "        " << "exit(1);"
+              << endl;
+        implf << "      }" << endl;
       } else if (classname.BeginsWith("vector<vector<ROOT::Math::LorentzVector")) {
         if(isSkimmedNtuple) {
-          implf << "        " << "for (" << classname.Data() <<"::const_iterator i = "
+          implf << "      " << "for (" << classname.Data() <<"::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
-          implf << "        " << "for (" << classname.Data() <<"::const_iterator i = "
+          implf << "      " << "for (" << classname.Data() <<"::const_iterator i = "
                 << aliasname << "_.begin(); i != "<< aliasname << "_.end(); ++i) {" << endl;
         }
         // this is a slightly hacky way to get rid of the outer vector< > ...
         std::string str = classname.Data() + 7;
         str[str.length() - 2] = 0;
-        implf << "          " << "for (" << str.c_str() << "::const_iterator j = i->begin(); "
+        implf << "        " << "for (" << str.c_str() << "::const_iterator j = i->begin(); "
           "j != i->end(); ++j) {" << endl;
-        implf << "            " << "int e;" << endl;
-        implf << "            " << "frexp(j->pt(), &e);" << endl;
-        implf << "            " << "if (not isfinite(j->pt()) || e > 30) {" << endl;
-        implf << "              " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
-              << " contains a bad float: %f\\n\", j->pt());" << endl << "              " << "exit(1);"
+        implf << "          " << "int e;" << endl;
+        implf << "          " << "frexp(j->pt(), &e);" << endl;
+        implf << "          " << "if (not isfinite(j->pt()) || e > 30) {" << endl;
+        implf << "            " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+              << " contains a bad float: %f\\n\", j->pt());" << endl << "            " << "exit(1);"
               << endl;
-        implf << "            }\n          }\n        }" << endl;
+        implf << "          }\n        }\n      }" << endl;
       } else if (classname.BeginsWith("vector<ROOT::Math::LorentzVector")) {
         if(isSkimmedNtuple) {
-          implf << "        " << "for (" << classname.Data() << "::const_iterator i = "
+          implf << "      " << "for (" << classname.Data() << "::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
-          implf << "        " << "for (" << classname.Data() << "::const_iterator i = "
+          implf << "      " << "for (" << classname.Data() << "::const_iterator i = "
                 << aliasname << "_.begin(); i != "<< aliasname << "_.end(); ++i) {" << endl;
         }
-        implf << "          " << "int e;" << endl;
-        implf << "          " << "frexp(i->pt(), &e);" << endl;
-        implf << "          " << "if (not isfinite(i->pt()) || e > 30) {" << endl;
-        implf << "            " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
-              << " contains a bad float: %f\\n\", i->pt());" << endl << "            " << "exit(1);"
-              << endl;
-        implf << "          }\n        }" << endl;
-      } else if (classname.BeginsWith("ROOT::Math::LorentzVector")) {
         implf << "        " << "int e;" << endl;
+        implf << "        " << "frexp(i->pt(), &e);" << endl;
+        implf << "        " << "if (not isfinite(i->pt()) || e > 30) {" << endl;
+        implf << "          " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+              << " contains a bad float: %f\\n\", i->pt());" << endl << "          " << "exit(1);"
+              << endl;
+        implf << "        }\n      }" << endl;
+      } else if (classname.BeginsWith("ROOT::Math::LorentzVector")) {
+        implf << "      " << "int e;" << endl;
         if(isSkimmedNtuple) {
-          implf << "        " << "frexp(" << aliasname << "_->pt(), &e);" << endl;
-          implf << "        " << "if (not isfinite(" << aliasname << "_->pt()) || e > 30) {" << endl;
-          implf << "          " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+          implf << "      " << "frexp(" << aliasname << "_->pt(), &e);" << endl;
+          implf << "      " << "if (not isfinite(" << aliasname << "_->pt()) || e > 30) {" << endl;
+          implf << "        " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
                 << " contains a bad float: %f\\n\", " << aliasname << "_->pt());" << endl
-                << "          " << "exit(1);"
+                << "        " << "exit(1);"
                 << endl;
         } else {
-          implf << "        " << "frexp(" << aliasname << "_.pt(), &e);" << endl;
-          implf << "        " << "if (not isfinite(" << aliasname << "_.pt()) || e > 30) {" << endl;
-          implf << "          " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+          implf << "      " << "frexp(" << aliasname << "_.pt(), &e);" << endl;
+          implf << "      " << "if (not isfinite(" << aliasname << "_.pt()) || e > 30) {" << endl;
+          implf << "        " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
                 << " contains a bad float: %f\\n\", " << aliasname << "_.pt());" << endl
-                << "          " << "exit(1);"
+                << "        " << "exit(1);"
                 << endl;
         }
-        implf << "        }" << endl;
+        implf << "      }" << endl;
       }
-      implf << "        #endif // #ifdef PARANOIA" << endl;
+      implf << "      #endif // #ifdef PARANOIA" << endl;
     }
-    implf << "      " << "} else { " << endl;
-    implf << "        " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
+    implf << "    " << "} else { " << endl;
+    implf << "      " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
           << " does not exist!\\n\");" << endl;
-    implf << "        " << "exit(1);" << endl << "      }" << endl;
-    implf << "      " << Form("%s_isLoaded",aliasname.Data()) << " = true;" << endl;
-    implf << "    " << "}" << endl;
+    implf << "      " << "exit(1);" << endl << "    }" << endl;
+    implf << "    " << Form("%s_isLoaded",aliasname.Data()) << " = true;" << endl;
+    implf << "  " << "}" << endl;
     if(isSkimmedNtuple) {
-      implf << "    " << "return *" << aliasname << "_;" << endl << "  }" << endl;
+      implf << "  " << "return *" << aliasname << "_;" << endl << "}" << endl << endl;
     }
     else if(classname == "TString" || classname == "string") {
-      implf << "    " << "return *" << aliasname << "_;" << endl << "  }" << endl;
+      implf << "  " << "return *" << aliasname << "_;" << endl << "}" << endl << endl;
     }
     else {
-      implf << "    " << "return " << aliasname << "_;" << endl << "  }" << endl;
+      implf << "  " << "return " << aliasname << "_;" << endl << "}" << endl << endl;
     }
   }
 
@@ -959,33 +958,32 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
   }//if(haveTauIDInfo)
 
   implf << endl;
-  implf << "  void " << Classname << "::progress( int nEventsTotal, int nEventsChain ){" << endl;
-  implf << "    int period = 1000;" << endl;
-  implf << "    if(nEventsTotal%1000 == 0) {" << endl;
-  implf << "      // xterm magic from L. Vacavant and A. Cerri" << endl;
-  implf << "      if (isatty(1)) {" << endl;
-  implf << "        if( ( nEventsChain - nEventsTotal ) > period ){" << endl;
-  implf << "          float frac = (float)nEventsTotal/(nEventsChain*0.01);" << endl;
-  implf << "          printf(\"\\015\\033[32m ---> \\033[1m\\033[31m%4.1f%%\"" << endl;
-  implf << "               \"\\033[0m\\033[32m <---\\033[0m\\015\", frac);" << endl;
-  implf << "          fflush(stdout);" << endl;
-  implf << "        }" << endl;
-  implf << "        else {" << endl;
-  implf << "          printf(\"\\015\\033[32m ---> \\033[1m\\033[31m%4.1f%%\"" << endl;
-  implf << "                 \"\\033[0m\\033[32m <---\\033[0m\\015\", 100.);" << endl;
-  implf << "          cout << endl;" << endl;
-  implf << "        }" << endl;
+  implf << "void " << Classname << "::progress( int nEventsTotal, int nEventsChain ){" << endl;
+  implf << "  int period = 1000;" << endl;
+  implf << "  if(nEventsTotal%1000 == 0) {" << endl;
+  implf << "    // xterm magic from L. Vacavant and A. Cerri" << endl;
+  implf << "    if (isatty(1)) {" << endl;
+  implf << "      if( ( nEventsChain - nEventsTotal ) > period ){" << endl;
+  implf << "        float frac = (float)nEventsTotal/(nEventsChain*0.01);" << endl;
+  implf << "        printf(\"\\015\\033[32m ---> \\033[1m\\033[31m%4.1f%%\"" << endl;
+  implf << "             \"\\033[0m\\033[32m <---\\033[0m\\015\", frac);" << endl;
+  implf << "        fflush(stdout);" << endl;
+  implf << "      }" << endl;
+  implf << "      else {" << endl;
+  implf << "        printf(\"\\015\\033[32m ---> \\033[1m\\033[31m%4.1f%%\"" << endl;
+  implf << "               \"\\033[0m\\033[32m <---\\033[0m\\015\", 100.);" << endl;
+  implf << "        cout << endl;" << endl;
   implf << "      }" << endl;
   implf << "    }" << endl;
   implf << "  }" << endl;
-  implf << "  " << endl;
-
+  implf << "}" << endl;
+  implf << "" << endl;
 
   // Create namespace that can be used to access the extern'd cms2
   // object methods without having to type cms2. everywhere.
   // Does not include cms2.Init and cms2.GetEntry because I think
   // it is healthy to leave those methods as they are
-  implf   << "namespace " << nameSpace << " {" << endl;
+  implf << "namespace " << nameSpace << " {" << endl << endl;
   for (Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     // TBranch *branch = ev->GetBranch(ev->GetAlias(aliasname.Data()));
@@ -1002,59 +1000,59 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
       }
-      implf   << "  const " << classname << " &" << aliasname << "()";
+      implf << "const " << classname << " &" << aliasname << "()";
     } else {
       if(classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-1);
         classname.ReplaceAll("edm::Wrapper<","");
       }
       if(classname != "" ) {
-        implf   << "  const " << classname << " &" << aliasname << "()";
+        implf << "const " << classname << " &" << aliasname << "()";
       } else {
         if(title.EndsWith("/i")){
-          implf   << "  const unsigned int &" << aliasname << "()";
+          implf << "const unsigned int &" << aliasname << "()";
         }
         if(title.EndsWith("/l")){
-          implf   << "  const unsigned long long &" << aliasname << "()";
+          implf << "const unsigned long long &" << aliasname << "()";
         }
         if(title.EndsWith("/F")){
-          implf   << "  const float &" << aliasname << "()";
+          implf << "const float &" << aliasname << "()";
         }
         if(title.EndsWith("/I")){
-          implf   << "  const int &" << aliasname << "()";
+          implf << "const int &" << aliasname << "()";
         }
         if(title.EndsWith("/O")){
-          implf   << "  const bool &" << aliasname << "()";
+          implf << "const bool &" << aliasname << "()";
         }
         if(title.EndsWith("/D")){
-          implf   << "  const double &" << aliasname << "()";
+          implf << "const double &" << aliasname << "()";
         }
       }
     }
-    implf   << " { return " << objName << "." << aliasname << "(); }" << endl;
+    implf << " { return " << objName << "." << aliasname << "(); }" << endl;
   }
   if(haveHLTInfo) {
     //functions to return whether or not trigger fired - HLT
-    implf   << "  " << "bool passHLTTrigger(TString trigName) { return " << objName << ".passHLTTrigger(trigName); }" << endl;
+    implf << "bool passHLTTrigger(TString trigName) { return " << objName << ".passHLTTrigger(trigName); }" << endl;
   }//if(haveHLTInfo)
   if(haveHLT8E29Info) {
     //functions to return whether or not trigger fired - HLT
-    implf   << "  " << "bool passHLT8E29Trigger(TString trigName) { return " << objName << ".passHLT8E29Trigger(trigName); }" << endl;
+    implf << "bool passHLT8E29Trigger(TString trigName) { return " << objName << ".passHLT8E29Trigger(trigName); }" << endl;
   }//if(haveHLT8E29Info)
   if(haveL1Info) {
     //functions to return whether or not trigger fired - L1
-    implf   << "  " << "bool passL1Trigger(TString trigName) { return " << objName << ".passL1Trigger(trigName); }" << endl;
+    implf << "bool passL1Trigger(TString trigName) { return " << objName << ".passL1Trigger(trigName); }" << endl;
   }//if(haveL1Info)
   if(haveTauIDInfo) {
     //functions to return whether or not trigger fired - HLT
-    implf   << "  " << "float passTauID(TString idName, unsigned int tauIndx) { return " << objName << ".passTauID(idName, tauIndx); }" << endl;
+    implf << "float passTauID(TString idName, unsigned int tauIndx) { return " << objName << ".passTauID(idName, tauIndx); }" << endl;
   }//if(haveTauIDInfo)
   if(havebtagInfo) {
     //functions to return whether or not trigger fired - HLT
-    implf   << "  " << "float getbtagvalue(TString bDiscriminatorName, unsigned int jetIndx) { return " << objName << ".getbtagvalue( bDiscriminatorName, jetIndx); }" << endl;
+    implf << "float getbtagvalue(TString bDiscriminatorName, unsigned int jetIndx) { return " << objName << ".getbtagvalue( bDiscriminatorName, jetIndx); }" << endl;
   }//if(haveTauIDInfo)
 
-  implf << "}" << endl;
+  implf << endl << "}" << endl;
 
 }
 
