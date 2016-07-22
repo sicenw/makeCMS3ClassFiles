@@ -1,4 +1,4 @@
-// C++
+// -*- C++ -*-
 // Original author: Puneeth Kalavase (UCSB)
 // Updates: Frank Golf (UCSD)
 // Updates: Ryan Kelley (UCSD)
