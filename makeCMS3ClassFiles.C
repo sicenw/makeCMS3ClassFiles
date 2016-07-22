@@ -190,30 +190,30 @@ void makeHeaderFile(TFile *f, const string& treeName, bool paranoid, const strin
     TString branchtitle(branch->GetTitle());
     TString branchclass(branch->GetClassName());
     if (!branchname.BeginsWith("int") &&
-       !branchname.BeginsWith("uint") &&
-       !branchname.BeginsWith("ull") &&
-       !branchname.BeginsWith("ullong") &&
-       !branchname.BeginsWith("bool") &&
-       !branchname.BeginsWith("float") &&
-       !branchname.BeginsWith("double") &&
-       !branchname.BeginsWith("uchars") &&
-       !branchtitle.EndsWith("/F") &&
-       !branchtitle.EndsWith("/I") &&
-       !branchtitle.EndsWith("/i") &&
-       !branchtitle.EndsWith("/l") &&
-       !branchtitle.EndsWith("/O") &&
-       !branchtitle.EndsWith("/D") &&
-       !branchtitle.BeginsWith("TString") &&
-       !branchtitle.BeginsWith("TBits") &&
-       !branchclass.Contains("LorentzVector") &&
-       !branchclass.Contains("int") &&
-       !branchclass.Contains("uint") &&
-       !branchclass.Contains("bool") &&
-       !branchclass.Contains("float") &&
-       !branchclass.Contains("double") &&
-       !branchclass.Contains("string") &&
-       !branchclass.Contains("TString") &&
-       !branchclass.Contains("long long"))
+        !branchname.BeginsWith("uint") &&
+        !branchname.BeginsWith("ull") &&
+        !branchname.BeginsWith("ullong") &&
+        !branchname.BeginsWith("bool") &&
+        !branchname.BeginsWith("float") &&
+        !branchname.BeginsWith("double") &&
+        !branchname.BeginsWith("uchars") &&
+        !branchtitle.EndsWith("/F") &&
+        !branchtitle.EndsWith("/I") &&
+        !branchtitle.EndsWith("/i") &&
+        !branchtitle.EndsWith("/l") &&
+        !branchtitle.EndsWith("/O") &&
+        !branchtitle.EndsWith("/D") &&
+        !branchtitle.BeginsWith("TString") &&
+        !branchtitle.BeginsWith("TBits") &&
+        !branchclass.Contains("LorentzVector") &&
+        !branchclass.Contains("int") &&
+        !branchclass.Contains("uint") &&
+        !branchclass.Contains("bool") &&
+        !branchclass.Contains("float") &&
+        !branchclass.Contains("double") &&
+        !branchclass.Contains("string") &&
+        !branchclass.Contains("TString") &&
+        !branchclass.Contains("long long"))
       continue;
 
     // if (branchclass.Contains("TString"))
@@ -303,8 +303,8 @@ void makeHeaderFile(TFile *f, const string& treeName, bool paranoid, const strin
     TString classname = branch->GetClassName();
     TString title = branch->GetTitle();
     bool isSkimmedNtuple = false;
-    if(!classname.Contains("edm::Wrapper<") &&
-       (classname.Contains("vector") || classname.Contains("LorentzVector") ) )
+    if (!classname.Contains("edm::Wrapper<") &&
+        (classname.Contains("vector") || classname.Contains("LorentzVector") ) )
       isSkimmedNtuple = true;
     if ( classname.Contains("vector") ) {
       if(classname.Contains("edm::Wrapper<") ) {
@@ -511,7 +511,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
 
 
   TList *aliasarray = new TList();
-  for(Int_t i = 0; i < fullarray->GetSize(); ++i) {
+  for (Int_t i = 0; i < fullarray->GetSize(); ++i) {
     TBranch *branch = 0;
     if (fullarray->At(i) == 0) continue;
     TString aliasname(fullarray->At(i)->GetName());
@@ -527,31 +527,31 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     TString branchname(branch->GetName());
     TString branchtitle(branch->GetTitle());
     TString branchclass(branch->GetClassName());
-    if(!branchname.BeginsWith("int") &&
-       !branchname.BeginsWith("uint") &&
-       !branchname.BeginsWith("ull") &&
-       !branchname.BeginsWith("ullong") &&
-       !branchname.BeginsWith("bool") &&
-       !branchname.BeginsWith("float") &&
-       !branchname.BeginsWith("double") &&
-       !branchname.BeginsWith("uchars") &&
-       !branchtitle.EndsWith("/F") &&
-       !branchtitle.EndsWith("/I") &&
-       !branchtitle.EndsWith("/i") &&
-       !branchtitle.EndsWith("/l") &&
-       !branchtitle.EndsWith("/O") &&
-       !branchtitle.EndsWith("/D") &&
-       !branchtitle.BeginsWith("TString") &&
-       !branchtitle.BeginsWith("TBits") &&
-       !branchclass.Contains("LorentzVector") &&
-       !branchclass.Contains("int") &&
-       !branchclass.Contains("uint") &&
-       !branchclass.Contains("bool") &&
-       !branchclass.Contains("float") &&
-       !branchclass.Contains("double") &&
-       !branchclass.Contains("string") &&
-       !branchclass.Contains("TString") &&
-       !branchclass.Contains("long long"))
+    if (!branchname.BeginsWith("int") &&
+        !branchname.BeginsWith("uint") &&
+        !branchname.BeginsWith("ull") &&
+        !branchname.BeginsWith("ullong") &&
+        !branchname.BeginsWith("bool") &&
+        !branchname.BeginsWith("float") &&
+        !branchname.BeginsWith("double") &&
+        !branchname.BeginsWith("uchars") &&
+        !branchtitle.EndsWith("/F") &&
+        !branchtitle.EndsWith("/I") &&
+        !branchtitle.EndsWith("/i") &&
+        !branchtitle.EndsWith("/l") &&
+        !branchtitle.EndsWith("/O") &&
+        !branchtitle.EndsWith("/D") &&
+        !branchtitle.BeginsWith("TString") &&
+        !branchtitle.BeginsWith("TBits") &&
+        !branchclass.Contains("LorentzVector") &&
+        !branchclass.Contains("int") &&
+        !branchclass.Contains("uint") &&
+        !branchclass.Contains("bool") &&
+        !branchclass.Contains("float") &&
+        !branchclass.Contains("double") &&
+        !branchclass.Contains("string") &&
+        !branchclass.Contains("TString") &&
+        !branchclass.Contains("long long"))
       continue;
 
     // if (branchclass.Contains("TString"))
@@ -565,7 +565,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
 
   // SetBranchAddresses for LorentzVectors
   // TBits also needs SetMakeClass(0)...
-  for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
+  for (Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     // TBranch *branch = ev->GetBranch(ev->GetAlias(aliasname.Data()));
     TBranch *branch = 0;
@@ -597,7 +597,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
 
   // SetBranchAddresses for everything else
   implf << "\n  tree->SetMakeClass(1);" << endl;
-  for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
+  for (Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     // TBranch *branch = ev->GetBranch(ev->GetAlias(aliasname.Data()));
     TBranch *branch = 0;
@@ -632,7 +632,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
   implf << "void " << Classname << "::GetEntry(unsigned int idx) {" << endl;
   implf << "  // this only marks branches as not loaded, saving a lot of time" << endl;
   implf << "  index = idx;" << endl;
-  for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
+  for (Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     implf << "  " << Form("%s_isLoaded",aliasname.Data()) << " = false;" << endl;
   }
@@ -641,7 +641,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
   // LoadAllBranches
   implf << "void " << Classname << "::LoadAllBranches() {" << endl;
   implf << "  // load all branches" << endl;
-  for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
+  for (Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     implf << "  " << "if (" << aliasname.Data() <<  "_branch != 0) " << Form("%s();",aliasname.Data()) << endl;
   }
@@ -661,34 +661,34 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     TString classname = branch->GetClassName();
     TString title = branch->GetTitle();
     bool isSkimmedNtuple = false;
-    if(!classname.Contains("edm::Wrapper<") &&
-       (classname.Contains("vector") || classname.Contains("LorentzVector") ) )
+    if (!classname.Contains("edm::Wrapper<") &&
+        (classname.Contains("vector") || classname.Contains("LorentzVector")))
       isSkimmedNtuple = true;
     if ( classname.Contains("vector") ) {
-      if(classname.Contains("edm::Wrapper<") ) {
+      if (classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
       }
       implf << "const " << classname << " &" << funcname << "() {" << endl;
     } else {
-      if(classname.Contains("edm::Wrapper<") ) {
+      if (classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-1);
         classname.ReplaceAll("edm::Wrapper<","");
       }
-      if(classname != "" ) {
+      if (classname != "" ) {
         implf << "const " << classname << " &" << funcname << "() {" << endl;
       } else {
-        if(title.EndsWith("/i"))
+        if (title.EndsWith("/i"))
           implf << "const unsigned int &" << funcname << "() {" << endl;
-        if(title.EndsWith("/l"))
+        if (title.EndsWith("/l"))
           implf << "const unsigned long long &" << funcname << "() {" << endl;
-        if(title.EndsWith("/F"))
+        if (title.EndsWith("/F"))
           implf << "const float &" << funcname << "() {" << endl;
-        if(title.EndsWith("/I"))
+        if (title.EndsWith("/I"))
           implf << "const int &" << funcname << "() {" << endl;
-        if(title.EndsWith("/O"))
+        if (title.EndsWith("/O"))
           implf << "const bool &" << funcname << "() {" << endl;
-        if(title.EndsWith("/D"))
+        if (title.EndsWith("/D"))
           implf << "const double &" << funcname << "() {" << endl;
       }
     }
@@ -699,7 +699,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     if (paranoid) {
       implf << "      #ifdef PARANOIA" << endl;
       if (classname == "vector<vector<float> >") {
-        if(isSkimmedNtuple) {
+        if (isSkimmedNtuple) {
           implf << "      " << "for (vector<vector<float> >::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
@@ -714,7 +714,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
               << endl;
         implf << "          }\n        }\n      }" << endl;
       } else if (classname == "vector<float>") {
-        if(isSkimmedNtuple) {
+        if (isSkimmedNtuple) {
           implf << "      " << "for (vector<float>::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
@@ -734,7 +734,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
               << endl;
         implf << "      }" << endl;
       } else if (classname.BeginsWith("vector<vector<ROOT::Math::LorentzVector")) {
-        if(isSkimmedNtuple) {
+        if (isSkimmedNtuple) {
           implf << "      " << "for (" << classname.Data() <<"::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
@@ -754,7 +754,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
               << endl;
         implf << "          }\n        }\n      }" << endl;
       } else if (classname.BeginsWith("vector<ROOT::Math::LorentzVector")) {
-        if(isSkimmedNtuple) {
+        if (isSkimmedNtuple) {
           implf << "      " << "for (" << classname.Data() << "::const_iterator i = "
                 << aliasname << "_->begin(); i != "<< aliasname << "_->end(); ++i) {" << endl;
         } else {
@@ -770,7 +770,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
         implf << "        }\n      }" << endl;
       } else if (classname.BeginsWith("ROOT::Math::LorentzVector")) {
         implf << "      " << "int e;" << endl;
-        if(isSkimmedNtuple) {
+        if (isSkimmedNtuple) {
           implf << "      " << "frexp(" << aliasname << "_->pt(), &e);" << endl;
           implf << "      " << "if (not isfinite(" << aliasname << "_->pt()) || e > 30) {" << endl;
           implf << "        " << "printf(\"branch " << Form("%s_branch",aliasname.Data())
@@ -795,10 +795,10 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     implf << "      " << "exit(1);" << endl << "    }" << endl;
     implf << "    " << Form("%s_isLoaded",aliasname.Data()) << " = true;" << endl;
     implf << "  " << "}" << endl;
-    if(isSkimmedNtuple) {
+    if (isSkimmedNtuple) {
       implf << "  " << "return *" << aliasname << "_;" << endl << "}" << endl << endl;
     }
-    else if(classname == "TString" || classname == "string") {
+    else if (classname == "TString" || classname == "string") {
       implf << "  " << "return *" << aliasname << "_;" << endl << "}" << endl << endl;
     }
     else {
@@ -811,28 +811,28 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
   bool haveHLT8E29Info = false;
   bool haveTauIDInfo = false;
   bool havebtagInfo = false;
-  for(int i = 0; i < aliasarray->GetSize(); i++) {
+  for (int i = 0; i < aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
-    if(aliasname=="hlt_trigNames")
+    if (aliasname=="hlt_trigNames")
       haveHLTInfo = true;
-    if(aliasname=="l1_trigNames")
+    if (aliasname=="l1_trigNames")
       haveL1Info = true;
-    if(aliasname=="hlt8e29_trigNames")
+    if (aliasname=="hlt8e29_trigNames")
       haveHLT8E29Info = true;
-    if(aliasname=="taus_pf_IDnames")
+    if (aliasname=="taus_pf_IDnames")
       haveTauIDInfo = true;
-    if(aliasname=="pfjets_bDiscriminatorNames")
+    if (aliasname=="pfjets_bDiscriminatorNames")
       havebtagInfo = true;
   }
 
-  if(haveHLTInfo) {
+  if (haveHLTInfo) {
     //functions to return whether or not trigger fired - HLT
     implf << "  " << "bool " << Classname << "::passHLTTrigger(TString trigName) {" << endl;
     implf << "    " << "int trigIndx;" << endl;
     implf << "    " << "vector<TString>::const_iterator begin_it = hlt_trigNames().begin();" << endl;
     implf << "    " << "vector<TString>::const_iterator end_it = hlt_trigNames().end();" << endl;
     implf << "    " << "vector<TString>::const_iterator found_it = find(begin_it, end_it, trigName);" << endl;
-    implf << "    " << "if(found_it != end_it)" << endl;
+    implf << "    " << "if (found_it != end_it)" << endl;
     implf << "      " << "trigIndx = found_it - begin_it;" << endl;
     implf << "    " << "else {" << endl;
     implf << "      " << "cout << \"Cannot find Trigger \" << trigName << endl; " << endl;
@@ -840,16 +840,16 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     implf << "    "   << "}" << endl << endl;
     implf << "  " << "return hlt_bits().TestBitNumber(trigIndx);" << endl;
     implf << "  " << "}" << endl;
-  }//if(haveHLTInfo)
+  }//if (haveHLTInfo)
 
-  if(haveHLT8E29Info) {
+  if (haveHLT8E29Info) {
     //functions to return whether or not trigger fired - HLT
     implf << "  " << "bool " << Classname << "::passHLT8E29Trigger(TString trigName) {" << endl;
     implf << "    " << "int trigIndx;" << endl;
     implf << "    " << "vector<TString>::const_iterator begin_it = hlt8e29_trigNames().begin();" << endl;
     implf << "    " << "vector<TString>::const_iterator end_it = hlt8e29_trigNames().end();" << endl;
     implf << "    " << "vector<TString>::const_iterator found_it = find(begin_it, end_it, trigName);" << endl;
-    implf << "    " << "if(found_it != end_it)" << endl;
+    implf << "    " << "if (found_it != end_it)" << endl;
     implf << "      " << "trigIndx = found_it - begin_it;" << endl;
     implf << "    " << "else {" << endl;
     implf << "      " << "cout << \"Cannot find Trigger \" << trigName << endl; " << endl;
@@ -857,17 +857,17 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     implf << "    "   << "}" << endl << endl;
     implf << "  " << "return hlt8e29_bits().TestBitNumber(trigIndx);" << endl;
     implf << "  " << "}" << endl;
-  }//if(haveHLT8E29Info)
+  }//if (haveHLT8E29Info)
 
 
-  if(haveL1Info) {
+  if (haveL1Info) {
     //functions to return whether or not trigger fired - L1
     implf << "  " << "bool " << Classname << "::passL1Trigger(TString trigName) {" << endl;
     implf << "    " << "int trigIndx;" << endl;
     implf << "    " << "vector<TString>::const_iterator begin_it = l1_trigNames().begin();" << endl;
     implf << "    " << "vector<TString>::const_iterator end_it = l1_trigNames().end();" << endl;
     implf << "    " << "vector<TString>::const_iterator found_it = find(begin_it, end_it, trigName);" << endl;
-    implf << "    " << "if(found_it != end_it)" << endl;
+    implf << "    " << "if (found_it != end_it)" << endl;
     implf << "      " << "trigIndx = found_it - begin_it;" << endl;
     implf << "    " << "else {" << endl;
     implf << "      " << "cout << \"Cannot find Trigger \" << trigName << endl; " << endl;
@@ -876,7 +876,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     //get the list of branches that hold the L1 bitmasks
     //store in a set 'cause its automatically sorted
     set<TString> s_L1bitmasks;
-    for(int j = 0; j < aliasarray->GetSize(); j++) {
+    for (int j = 0; j < aliasarray->GetSize(); j++) {
       TString aliasname(aliasarray->At(j)->GetName());
       // TBranch *branch = ev->GetBranch(ev->GetAlias(aliasname.Data()));
       TBranch *branch = 0;
@@ -886,24 +886,24 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
         branch = (TBranch*)aliasarray->At(j);
 
       TString classname = branch->GetClassName();
-      if(aliasname.Contains("l1_bits") && classname.Contains("int")) {
+      if (aliasname.Contains("l1_bits") && classname.Contains("int")) {
         s_L1bitmasks.insert(aliasname);
       }
 
     }
     int i = 0;
-    for(set<TString>::const_iterator s_it = s_L1bitmasks.begin();
-        s_it != s_L1bitmasks.end(); s_it++, i++) {
+    for (set<TString>::const_iterator s_it = s_L1bitmasks.begin();
+         s_it != s_L1bitmasks.end(); s_it++, i++) {
 
-      if(i==0) {
-        implf << "    " << "if(trigIndx <= 31) {" << endl;
+      if (i==0) {
+        implf << "    " << "if (trigIndx <= 31) {" << endl;
         implf << "      " << "unsigned int bitmask = 1;" << endl;
         implf << "      " << "bitmask <<= trigIndx;" << endl;
         implf << "      " << "return " << *s_it << "() & bitmask;" << endl;
         implf << "    " << "}" << endl;
         continue;
       }
-      implf << "    " << "if(trigIndx >= " << Form("%d && trigIndx <= %d", 32*i, 32*i+31) << ") {" << endl;
+      implf << "    " << "if (trigIndx >= " << Form("%d && trigIndx <= %d", 32*i, 32*i+31) << ") {" << endl;
       implf << "      " << "unsigned int bitmask = 1;" << endl;
       implf << "      " << "bitmask <<= (trigIndx - " << Form("%d",32*i) << "); " << endl;
       implf << "      " << "return " << *s_it << "() & bitmask;" << endl;
@@ -912,16 +912,16 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     implf << "  " << "return 0;" << endl;
     implf << "  " << "}" << endl;
     implf << "" << endl;
-  }//if(haveL1Info)
+  }//if (haveL1Info)
 
-  if(haveTauIDInfo) {
+  if (haveTauIDInfo) {
     //functions to return whether or not trigger fired - HLT
     implf << "  " << "float " << Classname << "::passTauID(TString idName, unsigned int tauIndx) {" << endl;
     implf << "    " << "int idIndx;" << endl;
     implf << "    " << "vector<TString>::const_iterator begin_it = taus_pf_IDnames().begin();" << endl;
     implf << "    " << "vector<TString>::const_iterator end_it = taus_pf_IDnames().end();" << endl;
     implf << "    " << "vector<TString>::const_iterator found_it = find(begin_it, end_it, idName);" << endl;
-    implf << "    " << "if(found_it != end_it)" << endl;
+    implf << "    " << "if (found_it != end_it)" << endl;
     implf << "      " << "idIndx = found_it - begin_it;" << endl;
     implf << "    " << "else {" << endl;
     implf << "      " << "cout << \"Cannot find Tau ID \" << idName << endl; " << endl;
@@ -934,16 +934,16 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     implf << "      " << "return 0;" << endl;
     implf << "    "   << "}" << endl;
     implf << "  " << "}" << endl;
-  }//if(haveTauIDInfo)
+  }//if (haveTauIDInfo)
 
-  if(havebtagInfo) {
+  if (havebtagInfo) {
     //functions to return whether or not trigger fired - HLT
     implf << "  " << "float " << Classname << "::getbtagvalue(TString bDiscriminatorName, unsigned int jetIndx) {" << endl;
     implf << "    " << "size_t bDiscriminatorIndx;" << endl;
     implf << "    " << "vector<TString>::const_iterator begin_it = pfjets_bDiscriminatorNames().begin();" << endl;
     implf << "    " << "vector<TString>::const_iterator end_it = pfjets_bDiscriminatorNames().end();" << endl;
     implf << "    " << "vector<TString>::const_iterator found_it = find(begin_it, end_it, bDiscriminatorName);" << endl;
-    implf << "    " << "if(found_it != end_it)" << endl;
+    implf << "    " << "if (found_it != end_it)" << endl;
     implf << "      " << "bDiscriminatorIndx = found_it - begin_it;" << endl;
     implf << "    " << "else {" << endl;
     implf << "      " << "cout << \"Cannot find b discriminator \" << bDiscriminatorName << endl; " << endl;
@@ -956,15 +956,15 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     implf << "      " << "return 0;" << endl;
     implf << "    " << "}" << endl;
     implf << "  " << "}" << endl;
-  }//if(haveTauIDInfo)
+  }//if (haveTauIDInfo)
 
   implf << endl;
   implf << "void " << Classname << "::progress( int nEventsTotal, int nEventsChain ){" << endl;
   implf << "  int period = 1000;" << endl;
-  implf << "  if(nEventsTotal%1000 == 0) {" << endl;
+  implf << "  if (nEventsTotal%1000 == 0) {" << endl;
   implf << "    // xterm magic from L. Vacavant and A. Cerri" << endl;
   implf << "    if (isatty(1)) {" << endl;
-  implf << "      if( ( nEventsChain - nEventsTotal ) > period ){" << endl;
+  implf << "      if ((nEventsChain - nEventsTotal) > period) {" << endl;
   implf << "        float frac = (float)nEventsTotal/(nEventsChain*0.01);" << endl;
   implf << "        printf(\"\\015\\033[32m ---> \\033[1m\\033[31m%4.1f%%\"" << endl;
   implf << "             \"\\033[0m\\033[32m <---\\033[0m\\015\", frac);" << endl;
@@ -997,61 +997,61 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     TString classname = branch->GetClassName();
     TString title = branch->GetTitle();
     if ( classname.Contains("vector") ) {
-      if(classname.Contains("edm::Wrapper") ) {
+      if (classname.Contains("edm::Wrapper") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
       }
       implf << "const " << classname << " &" << aliasname << "()";
     } else {
-      if(classname.Contains("edm::Wrapper<") ) {
+      if (classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-1);
         classname.ReplaceAll("edm::Wrapper<","");
       }
-      if(classname != "" ) {
+      if (classname != "" ) {
         implf << "const " << classname << " &" << aliasname << "()";
       } else {
-        if(title.EndsWith("/i")){
+        if (title.EndsWith("/i")){
           implf << "const unsigned int &" << aliasname << "()";
         }
-        if(title.EndsWith("/l")){
+        if (title.EndsWith("/l")){
           implf << "const unsigned long long &" << aliasname << "()";
         }
-        if(title.EndsWith("/F")){
+        if (title.EndsWith("/F")){
           implf << "const float &" << aliasname << "()";
         }
-        if(title.EndsWith("/I")){
+        if (title.EndsWith("/I")){
           implf << "const int &" << aliasname << "()";
         }
-        if(title.EndsWith("/O")){
+        if (title.EndsWith("/O")){
           implf << "const bool &" << aliasname << "()";
         }
-        if(title.EndsWith("/D")){
+        if (title.EndsWith("/D")){
           implf << "const double &" << aliasname << "()";
         }
       }
     }
     implf << " { return " << objName << "." << aliasname << "(); }" << endl;
   }
-  if(haveHLTInfo) {
+  if (haveHLTInfo) {
     //functions to return whether or not trigger fired - HLT
     implf << "bool passHLTTrigger(TString trigName) { return " << objName << ".passHLTTrigger(trigName); }" << endl;
-  }//if(haveHLTInfo)
-  if(haveHLT8E29Info) {
+  }//if (haveHLTInfo)
+  if (haveHLT8E29Info) {
     //functions to return whether or not trigger fired - HLT
     implf << "bool passHLT8E29Trigger(TString trigName) { return " << objName << ".passHLT8E29Trigger(trigName); }" << endl;
-  }//if(haveHLT8E29Info)
-  if(haveL1Info) {
+  }//if (haveHLT8E29Info)
+  if (haveL1Info) {
     //functions to return whether or not trigger fired - L1
     implf << "bool passL1Trigger(TString trigName) { return " << objName << ".passL1Trigger(trigName); }" << endl;
-  }//if(haveL1Info)
-  if(haveTauIDInfo) {
+  }//if (haveL1Info)
+  if (haveTauIDInfo) {
     //functions to return whether or not trigger fired - HLT
     implf << "float passTauID(TString idName, unsigned int tauIndx) { return " << objName << ".passTauID(idName, tauIndx); }" << endl;
-  }//if(haveTauIDInfo)
-  if(havebtagInfo) {
+  }//if (haveTauIDInfo)
+  if (havebtagInfo) {
     //functions to return whether or not trigger fired - HLT
     implf << "float getbtagvalue(TString bDiscriminatorName, unsigned int jetIndx) { return " << objName << ".getbtagvalue( bDiscriminatorName, jetIndx); }" << endl;
-  }//if(haveTauIDInfo)
+  }//if (haveTauIDInfo)
 
   implf << endl << "}" << endl;
 
@@ -1063,7 +1063,7 @@ void makeSrcFile(const string& Classname, const string& nameSpace, const string&
 
   // TTree *ev = (TTree*)f->Get("Events");
 
-  codef << "// C++" << endl;
+  codef << "// -*- C++ -*-" << endl;
   codef << "// Usage:" << endl;
   codef << "// > root -b -q doAll.C" << endl;
   codef << "" << endl;
@@ -1080,14 +1080,14 @@ void makeSrcFile(const string& Classname, const string& nameSpace, const string&
   codef << "" << endl;
   codef << "// " << Classname << endl;
   codef << "#include \"" + Classname+".cc\"" << endl;
-  if(branchNamesFile!="")
+  if (branchNamesFile!="")
     codef << "#include \"branches.h\"" << endl;
   codef << "" << endl;
   codef << "using namespace std;" << endl;
   codef << "using namespace " << nameSpace << ";" << endl;
   codef << endl;
 
-  codef << "int ScanChain( TChain* chain, bool fast = true, int nEvents = -1, string skimFilePrefix = \"test\") {" << endl;
+  codef << "int ScanChain(TChain* chain, bool fast = true, int nEvents = -1, string skimFilePrefix = \"test\") {" << endl;
   codef << "" << endl;
   codef << "  // Benchmark" << endl;
   codef << "  TBenchmark *bmark = new TBenchmark();" << endl;
@@ -1101,8 +1101,8 @@ void makeSrcFile(const string& Classname, const string& nameSpace, const string&
   codef << "  // Loop over events to Analyze" << endl;
   codef << "  unsigned int nEventsTotal = 0;" << endl;
   codef << "  unsigned int nEventsChain = chain->GetEntries();" << endl;
-  codef << "  if( nEvents >= 0 ) nEventsChain = nEvents;" << endl;
-  if(branchNamesFile!="")
+  codef << "  if (nEvents >= 0) nEventsChain = nEvents;" << endl;
+  if (branchNamesFile!="")
     codef << "  InitSkimmedTree(skimFilePrefix);" << endl;
   codef << "  TObjArray *listOfFiles = chain->GetListOfFiles();" << endl;
   codef << "  TIter fileIter(listOfFiles);" << endl;
@@ -1112,23 +1112,23 @@ void makeSrcFile(const string& Classname, const string& nameSpace, const string&
   codef << "  while ( (currentFile = (TFile*)fileIter.Next()) ) {" << endl;
   codef << "" << endl;
   codef << "    // Get File Content" << endl;
-  codef << "    TFile file( currentFile->GetTitle() );" << endl;
+  codef << "    TFile file(currentFile->GetTitle());" << endl;
   codef << "    TTree *tree = (TTree*)file.Get(\"" << treeName << "\");" << endl;
-  codef << "    if(fast) TTreeCache::SetLearnEntries(10);" << endl;
-  codef << "    if(fast) tree->SetCacheSize(128*1024*1024);" << endl;
+  codef << "    if (fast) TTreeCache::SetLearnEntries(10);" << endl;
+  codef << "    if (fast) tree->SetCacheSize(128*1024*1024);" << endl;
   codef << "    " << objName << ".Init(tree);" << endl;
-  codef << "    " << endl;
+  codef << "" << endl;
   codef << "    // Loop over Events in current file" << endl;
-  codef << "    if( nEventsTotal >= nEventsChain ) continue;" << endl;
+  codef << "    if (nEventsTotal >= nEventsChain) continue;" << endl;
   codef << "    unsigned int nEventsTree = tree->GetEntriesFast();" << endl;
-  codef << "    for( unsigned int event = 0; event < nEventsTree; ++event) {" << endl;
-  codef << "    " << endl;
+  codef << "    for (unsigned int event = 0; event < nEventsTree; ++event) {" << endl;
+  codef << "" << endl;
   codef << "      // Get Event Content" << endl;
-  codef << "      if( nEventsTotal >= nEventsChain ) continue;" << endl;
-  codef << "      if(fast) tree->LoadTree(event);" << endl;
+  codef << "      if (nEventsTotal >= nEventsChain) continue;" << endl;
+  codef << "      if (fast) tree->LoadTree(event);" << endl;
   codef << "      " << objName << ".GetEntry(event);" << endl;
   codef << "      ++nEventsTotal;" << endl;
-  codef << "    " << endl;
+  codef << "" << endl;
   codef << "      // Progress" << endl;
   codef << "      " << Classname << "::progress( nEventsTotal, nEventsChain );" << endl << endl;
   codef << "      // Analysis Code" << endl << endl;
@@ -1138,10 +1138,10 @@ void makeSrcFile(const string& Classname, const string& nameSpace, const string&
   codef << "    delete tree;" << endl;
   codef << "    file.Close();" << endl;
   codef << "  }" << endl;
-  codef << "  if ( nEventsChain != nEventsTotal ) {" << endl;
+  codef << "  if (nEventsChain != nEventsTotal) {" << endl;
   codef << "    cout << Form( \"ERROR: number of events from files (\%d) is not equal to total number of events (\%d)\", nEventsChain, nEventsTotal ) << endl;" << endl;
   codef << "  }" << endl;
-  if(branchNamesFile!="") {
+  if (branchNamesFile!="") {
     codef << "  outFile_->cd();" << endl;
     codef << "  outTree_->Write();" << endl;
     codef << "  outFile_->Close();" << endl;
@@ -1176,36 +1176,36 @@ void makeBranchFile(std::string branchNamesFile, std::string treeName) {
     getline(branchesF, temp);
     TString line(temp);
     // do not use commented lines
-    if(line.BeginsWith("//"))
+    if (line.BeginsWith("//"))
       continue;
     vector<TString> v_line;
     TIter objIt((TObjArray*)line.Tokenize(" "));
     while(TObject *obj = (TObject*)objIt.Next()) {
-      if(obj==NULL || obj==0)
+      if (obj==NULL || obj==0)
         continue;
       v_line.push_back(obj->GetName());
     }
 
-    if(v_line.size() == 0)
+    if (v_line.size() == 0)
       continue;
     TString varName;
-    //loop over v_line until you get to the first element thats not a space
-    for(vector<TString>::iterator it = v_line.begin();
-        it != v_line.end(); it++) {
-      if( *it != " " ) {
+    // loop over v_line until you get to the first element thats not a space
+    for (vector<TString>::iterator it = v_line.begin();
+         it != v_line.end(); it++) {
+      if ( *it != " " ) {
         varName = *it;
       }
     }
 
     v_varNames.push_back(varName.Strip());  //paranoid....strips trailing spaces
     TString datatype("");
-    for(unsigned int i = 0; i < v_line.size()-1; i++) {
+    for (unsigned int i = 0; i < v_line.size()-1; i++) {
       TString temp2 = v_line[i];
-      if(temp2.Contains("vector") && !temp2.Contains("std::")) temp2.ReplaceAll("vector", "std::vector");
-      if(temp2.Contains("LorentzVector") && !temp2.Contains("ROOT::Math::LorentzVector")) temp2.ReplaceAll("LorentzVector", "ROOT::Math::LorentzVector< ROOT::Math::PxPyPzE4D<float> >");
+      if (temp2.Contains("vector") && !temp2.Contains("std::")) temp2.ReplaceAll("vector", "std::vector");
+      if (temp2.Contains("LorentzVector") && !temp2.Contains("ROOT::Math::LorentzVector")) temp2.ReplaceAll("LorentzVector", "ROOT::Math::LorentzVector< ROOT::Math::PxPyPzE4D<float> >");
       temp2.ReplaceAll(">>", "> >");
       temp2.ReplaceAll(">>>", "> > >");
-      if(i!=0) datatype = datatype+" " + temp2;
+      if (i!=0) datatype = datatype+" " + temp2;
       else datatype = datatype+temp2;
     }
     v_datatypes.push_back(datatype);
@@ -1217,9 +1217,9 @@ void makeBranchFile(std::string branchNamesFile, std::string treeName) {
   branchfile << "#include \"TFile.h\"" << endl;
   branchfile << "#include \"TTree.h\"" << endl << endl << endl << endl;
 
-  for(unsigned int i = 0; i < v_datatypes.size(); i++) {
+  for (unsigned int i = 0; i < v_datatypes.size(); i++) {
     TString temp2(v_varNames.at(i));
-    if(v_datatypes.at(i).Contains("vector") || v_datatypes.at(i).Contains("LorentzVector")) {
+    if (v_datatypes.at(i).Contains("vector") || v_datatypes.at(i).Contains("LorentzVector")) {
       branchfile << v_datatypes.at(i) << " *" << temp2.ReplaceAll("_","")+"_;" << endl;
       continue;
     }
@@ -1232,32 +1232,32 @@ void makeBranchFile(std::string branchNamesFile, std::string treeName) {
 
   //now declare the branches and set aliases in the InitSkimmedTree function
   branchfile << "void InitSkimmedTree(std::string skimFilePrefix=\"\") {\n\n";
-  branchfile << "   if(skimFilePrefix != \"\")" << endl;
+  branchfile << "   if (skimFilePrefix != \"\")" << endl;
   branchfile << "      outFile_ = TFile::Open(string(skimFilePrefix + \"_skimmednTuple.root\").c_str(),\"RECREATE\");\n";
   branchfile << "   else outFile_ = TFile::Open(\"skimmednTuple.root\", \"RECREATE\");\n";
   branchfile << "   outFile_->cd();" << endl;
   branchfile << "   outTree_ = new TTree(\"" << treeName << "\", \"\");\n\n";
   branchfile << "   //book the branches\n";
-  for(unsigned int i = 0; i < v_datatypes.size(); i++) {
+  for (unsigned int i = 0; i < v_datatypes.size(); i++) {
     TString varName = v_varNames[i];
     varName = varName.ReplaceAll("_", "") + "_";
     TString varType = v_datatypes[i];
-    if(varType.BeginsWith("std::vector")
-       || varType.BeginsWith("ROOT::Math") ) {
+    if (varType.BeginsWith("std::vector")
+        || varType.BeginsWith("ROOT::Math") ) {
       TString prefix = "";
-      if(varType.BeginsWith("std::vector<float>") )
+      if (varType.BeginsWith("std::vector<float>") )
         prefix = "floats";
-      if(varType.BeginsWith("std::vector<int>") )
+      if (varType.BeginsWith("std::vector<int>") )
         prefix = "ints";
-      if(varType.BeginsWith("std::vector<unsigned int>") )
+      if (varType.BeginsWith("std::vector<unsigned int>") )
         prefix = "uints";
-      if(varType.BeginsWith("std::vector<unsigned char>") )
+      if (varType.BeginsWith("std::vector<unsigned char>") )
         prefix = "uchars";
-      if(varType.BeginsWith("ROOT::Math::LorentzVector<") )
+      if (varType.BeginsWith("ROOT::Math::LorentzVector<") )
         prefix = "floatROOTMathPxPyPzE4DROOTMathLorentzVector";
-      if(varType.BeginsWith("std::vector<ROOT::Math::LorentzVector<") )
+      if (varType.BeginsWith("std::vector<ROOT::Math::LorentzVector<") )
         prefix = "floatROOTMathPxPyPzE4DROOTMathLorentzVectors";
-      if(varType.Contains("std::vector<std::vector<ROOT::Math::LorentzVector<") )
+      if (varType.Contains("std::vector<std::vector<ROOT::Math::LorentzVector<") )
         prefix = "floatROOTMathPxPyPzE4DROOTMathLorentzVectorss";
       branchfile << "   outTree_->Branch(\"" << prefix + "_" +varName << "\",   \""
                  << varType << "\",   &" << varName << ");" << endl;
@@ -1265,35 +1265,35 @@ void makeBranchFile(std::string branchNamesFile, std::string treeName) {
                  << "\"" << prefix+"_"+varName << "\");" << endl;
       continue;
     }
-    if(varType=="float" || varType == "Float_t") {
+    if (varType=="float" || varType == "Float_t") {
       branchfile << "   outTree_->Branch(\"" << varName << "\",   &" << varName;
       branchfile << ",   \"" << varName + "/F\");" << endl;
       branchfile << "   outTree_->SetAlias(\"" << v_varNames[i] << "\",   "
                  << "\"" << varName << "\");" << endl;
       continue;
     }
-    if(varType=="unsigned int" || varType == "UInt_t") {
+    if (varType=="unsigned int" || varType == "UInt_t") {
       branchfile << "   outTree_->Branch(\"" << varName << "\",   &" << varName;
       branchfile << ",   \"" << varName + "/i\");" << endl;
       branchfile << "   outTree_->SetAlias(\"" << v_varNames[i] << "\",   "
                  << "\"" << varName << "\");" << endl;
       continue;
     }
-    if(varType=="unsigned long long" || varType == "ULong64_t" || varType == "const unsigned long long") {
+    if (varType=="unsigned long long" || varType == "ULong64_t" || varType == "const unsigned long long") {
       branchfile << "   outTree_->Branch(\"" << varName << "\",   &" << varName;
       branchfile << ",   \"" << varName + "/l\");" << endl;
       branchfile << "   outTree_->SetAlias(\"" << v_varNames[i] << "\",   "
                  << "\"" << varName << "\");" << endl;
       continue;
     }
-    if(varType=="int" || varType == "Int_t") {
+    if (varType=="int" || varType == "Int_t") {
       branchfile << "   outTree_->Branch(\"" << varName << "\",   &" << varName;
       branchfile << ",   \"" << varName + "/I\");" << endl;
       branchfile << "   outTree_->SetAlias(\"" << v_varNames[i] << "\",   "
                  << "\"" << varName << "\");" << endl;
       continue;
     }
-    if(varType=="double" || varType == "Double_t") {
+    if (varType=="double" || varType == "Double_t") {
       branchfile << "   outTree_->Branch(\"" << varName << "\",   &" << varName;
       branchfile << ",   \"" << varName + "/D\");" << endl;
       branchfile << "   outTree_->SetAlias(\"" << v_varNames[i] << "\",   "
