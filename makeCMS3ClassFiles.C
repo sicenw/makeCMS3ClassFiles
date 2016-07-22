@@ -238,7 +238,7 @@ void makeHeaderFile(TFile *f, const string& treeName, bool paranoid, const strin
 
     TString classname = branch->GetClassName();
     TString title     = branch->GetTitle();
-    if ( classname.Contains("vector") ) {
+    if (classname.Contains("vector")) {
       if(classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
@@ -306,7 +306,7 @@ void makeHeaderFile(TFile *f, const string& treeName, bool paranoid, const strin
     if (!classname.Contains("edm::Wrapper<") &&
         (classname.Contains("vector") || classname.Contains("LorentzVector") ) )
       isSkimmedNtuple = true;
-    if ( classname.Contains("vector") ) {
+    if (classname.Contains("vector")) {
       if(classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
@@ -406,7 +406,7 @@ void makeHeaderFile(TFile *f, const string& treeName, bool paranoid, const strin
 
     TString classname = branch->GetClassName();
     TString title = branch->GetTitle();
-    if ( classname.Contains("vector") ) {
+    if (classname.Contains("vector")) {
       if(classname.Contains("edm::Wrapper") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
@@ -576,8 +576,8 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
 
     TString classname = branch->GetClassName();
     TString branch_ptr = Form("%s_branch",aliasname.Data());
-    if ( !classname.Contains("vector<vector") ) {
-      if ( classname.Contains("Lorentz") || classname.Contains("PositionVector") || classname.Contains("TBits")) {
+    if (!classname.Contains("vector<vector")) {
+      if (classname.Contains("Lorentz") || classname.Contains("PositionVector") || classname.Contains("TBits")) {
         // implf << "  " << Form("%s_branch",aliasname.Data()) << " = 0;" << endl;
         if (have_aliases) {
           // implf << "  " << "if (tree->GetAlias(\"" << aliasname << "\") != 0) {" << endl;
@@ -608,7 +608,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
 
     TString classname = branch->GetClassName();
     TString branch_ptr = Form("%s_branch",aliasname.Data());
-    if ( ! (classname.Contains("Lorentz") || classname.Contains("PositionVector") || classname.Contains("TBits")) || classname.Contains("vector<vector") ) {
+    if (! (classname.Contains("Lorentz") || classname.Contains("PositionVector") || classname.Contains("TBits")) || classname.Contains("vector<vector") ) {
       // implf << "  " << Form("%s_branch",aliasname.Data()) << " = 0;" << endl;
       if (have_aliases) {
         // implf << "  " << "if (tree->GetAlias(\"" << aliasname << "\") != 0) {" << endl;
@@ -664,7 +664,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     if (!classname.Contains("edm::Wrapper<") &&
         (classname.Contains("vector") || classname.Contains("LorentzVector")))
       isSkimmedNtuple = true;
-    if ( classname.Contains("vector") ) {
+    if (classname.Contains("vector")) {
       if (classname.Contains("edm::Wrapper<") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
@@ -996,7 +996,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
 
     TString classname = branch->GetClassName();
     TString title = branch->GetTitle();
-    if ( classname.Contains("vector") ) {
+    if (classname.Contains("vector")) {
       if (classname.Contains("edm::Wrapper") ) {
         classname = classname(0,classname.Length()-2);
         classname.ReplaceAll("edm::Wrapper<","");
@@ -1171,7 +1171,7 @@ void makeBranchFile(std::string branchNamesFile, std::string treeName) {
   ifstream branchesF(branchNamesFile.c_str());
   vector<TString> v_datatypes;
   vector<TString> v_varNames;
-  while(!branchesF.eof()) {
+  while (!branchesF.eof()) {
     string temp;
     getline(branchesF, temp);
     TString line(temp);
@@ -1180,7 +1180,7 @@ void makeBranchFile(std::string branchNamesFile, std::string treeName) {
       continue;
     vector<TString> v_line;
     TIter objIt((TObjArray*)line.Tokenize(" "));
-    while(TObject *obj = (TObject*)objIt.Next()) {
+    while (TObject *obj = (TObject*)objIt.Next()) {
       if (obj==NULL || obj==0)
         continue;
       v_line.push_back(obj->GetName());
