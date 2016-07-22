@@ -473,7 +473,6 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
   // TTree *ev = (TTree*)f->Get("Events");
 
   implf << "#include \"" << Classname+".h" << "\"\n" << Classname << " " << objName << ";" << endl << endl;
-
   implf << "void " << Classname << "::Init(TTree *tree) {" << endl;
 
   TList* list_of_keys = f->GetListOfKeys();
@@ -578,26 +577,25 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     TString branch_ptr = Form("%s_branch",aliasname.Data());
     if ( !classname.Contains("vector<vector") ) {
       if ( classname.Contains("Lorentz") || classname.Contains("PositionVector") || classname.Contains("TBits")) {
-        implf << "  " << Form("%s_branch",aliasname.Data()) << " = 0;" << endl;
+        // implf << "  " << Form("%s_branch",aliasname.Data()) << " = 0;" << endl;
         if (have_aliases) {
-          implf << "  " << "if (tree->GetAlias(\"" << aliasname << "\") != 0) {" << endl;
-          implf << "    " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(tree->GetAlias(\"" << aliasname << "\"));" << endl;
+          // implf << "  " << "if (tree->GetAlias(\"" << aliasname << "\") != 0) {" << endl;
+          implf << "  " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(tree->GetAlias(\"" << aliasname << "\"));" << endl;
           //implf << "    " << Form("%s_branch",aliasname.Data()) << "->SetAddress(&" << aliasname << "_);" << endl << "  }" << endl;
-          implf << Form("    if (%s) {%s->SetAddress(&%s_);}\n  }", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
+          implf << Form("  if (%s) %s->SetAddress(&%s_);", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
         }
         else {
-          implf << "  " << "if (tree->GetBranch(\"" << aliasname << "\") != 0) {" << endl;
-          implf << "    " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(\"" << aliasname << "\");" << endl;
+          // implf << "  " << "if (tree->GetBranch(\"" << aliasname << "\") != 0) {" << endl;
+          implf << "  " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(\"" << aliasname << "\");" << endl;
           //implf << "    " << Form("%s_branch",aliasname.Data()) << "->SetAddress(&" << aliasname << "_);" << endl << "  }" << endl;
-          implf << Form("    if (%s) {%s->SetAddress(&%s_);}\n  }", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
+          implf << Form("  if (%s) %s->SetAddress(&%s_);", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
         }
       }
     }
   }
 
-
   // SetBranchAddresses for everything else
-  implf << "  tree->SetMakeClass(1);" << endl;
+  implf << "\n  tree->SetMakeClass(1);" << endl;
   for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     // TBranch *branch = ev->GetBranch(ev->GetAlias(aliasname.Data()));
@@ -610,38 +608,38 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     TString classname = branch->GetClassName();
     TString branch_ptr = Form("%s_branch",aliasname.Data());
     if ( ! (classname.Contains("Lorentz") || classname.Contains("PositionVector") || classname.Contains("TBits")) || classname.Contains("vector<vector") ) {
-      implf << "  " << Form("%s_branch",aliasname.Data()) << " = 0;" << endl;
+      // implf << "  " << Form("%s_branch",aliasname.Data()) << " = 0;" << endl;
       if (have_aliases) {
-        implf << "  " << "if (tree->GetAlias(\"" << aliasname << "\") != 0) {" << endl;
-        implf << "    " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(tree->GetAlias(\"" << aliasname << "\"));" << endl;
+        // implf << "  " << "if (tree->GetAlias(\"" << aliasname << "\") != 0) {" << endl;
+        implf << "  " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(tree->GetAlias(\"" << aliasname << "\"));" << endl;
         //implf << "    " << Form("%s_branch",aliasname.Data()) << "->SetAddress(&" << aliasname << "_);" << endl << "  }" << endl;
-        implf << Form("    if (%s) {%s->SetAddress(&%s_);}\n  }", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
+        implf << Form("  if (%s) %s->SetAddress(&%s_);", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
       }
       else {
-        implf << "  " << "if (tree->GetBranch(\"" << aliasname << "\") != 0) {" << endl;
-        implf << "    " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(\"" << aliasname << "\");" << endl;
+        // implf << "  " << "if (tree->GetBranch(\"" << aliasname << "\") != 0) {" << endl;
+        implf << "  " << Form("%s_branch",aliasname.Data()) << " = tree->GetBranch(\"" << aliasname << "\");" << endl;
         //implf << "    " << Form("%s_branch",aliasname.Data()) << "->SetAddress(&" << aliasname << "_);" << endl << "  }" << endl;
-        implf << Form("    if (%s) {%s->SetAddress(&%s_);}\n  }", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
+        implf << Form("  if (%s) %s->SetAddress(&%s_);", branch_ptr.Data(), branch_ptr.Data(), aliasname.Data()) << endl;
       }
     }
   }
 
   implf << "  tree->SetMakeClass(0);" << endl;
-  implf << "}" << endl;
+  implf << "}" << endl << endl;
 
   // GetEntry
-  implf << "void " << Classname << "::GetEntry(unsigned int idx) " << endl;
-  implf << "  // this only marks branches as not loaded, saving a lot of time" << endl << "  {" << endl;
-  implf << "    index = idx;" << endl;
+  implf << "void " << Classname << "::GetEntry(unsigned int idx) {" << endl;
+  implf << "  // this only marks branches as not loaded, saving a lot of time" << endl;
+  implf << "  index = idx;" << endl;
   for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
-    implf << "    " << Form("%s_isLoaded",aliasname.Data()) << " = false;" << endl;
+    implf << "  " << Form("%s_isLoaded",aliasname.Data()) << " = false;" << endl;
   }
-  implf << "  }" << endl << endl;
+  implf << "}" << endl << endl;
 
   // LoadAllBranches
-  implf << "void " << Classname << "::LoadAllBranches() " << endl;
-  implf << "  // load all branches" << endl << "{" << endl;
+  implf << "void " << Classname << "::LoadAllBranches() {" << endl;
+  implf << "  // load all branches" << endl;
   for(Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     implf << "  " << "if (" << aliasname.Data() <<  "_branch != 0) " << Form("%s();",aliasname.Data()) << endl;
