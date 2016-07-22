@@ -1062,10 +1062,10 @@ void makeSrcFile(const string& Classname, const string& nameSpace, const string&
 
   // TTree *ev = (TTree*)f->Get("Events");
 
-  codef << "// Usage:" << endl;
-  codef << "// > root -b doAll.C" << endl;
-  codef << "" << endl;
   codef << "// C++" << endl;
+  codef << "// Usage:" << endl;
+  codef << "// > root -b -q doAll.C" << endl;
+  codef << "" << endl;
   codef << "#include <iostream>" << endl;
   codef << "#include <vector>" << endl;
   codef << "" << endl;
