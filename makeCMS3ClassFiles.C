@@ -596,7 +596,8 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
   }
 
   // SetBranchAddresses for everything else
-  implf << "\n  tree->SetMakeClass(1);" << endl;
+  implf << "" << endl;
+  implf << "  tree->SetMakeClass(1);" << endl << endl;
   for (Int_t i = 0; i< aliasarray->GetSize(); i++) {
     TString aliasname(aliasarray->At(i)->GetName());
     // TBranch *branch = ev->GetBranch(ev->GetAlias(aliasname.Data()));
@@ -625,6 +626,7 @@ void makeCCFile(TFile *f, const string& Classname, const string& nameSpace, cons
     }
   }
 
+  implf << "" << endl;
   implf << "  tree->SetMakeClass(0);" << endl;
   implf << "}" << endl << endl;
 
